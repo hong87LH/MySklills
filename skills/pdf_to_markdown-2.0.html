@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to Markdown | Global Design System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@400;450;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <style>
+        :root {
+            /* 日间模式 (Mastercard Style) */
+            --bg-canvas: #F3F0EE;
+            --bg-surface: #FCFBFA;
+            --text-main: #141413;
+            --accent: #CF4500;
+            --accent-light: #F37338;
+            --border: rgba(20, 20, 19, 0.1);
+            --terminal-bg: #141413;
+            --terminal-text: #F3F0EE;
+            --terminal-highlight: #F37338; /* 浅橙色光标 */
+            --radius-container: 40px;
+            --radius-button: 20px;
+            --link-blue: #3860BE; 
+        }
+
+        [data-theme="dark"] {
+            /* 夜间模式 (Spotify Style) */
+            --bg-canvas: #000000;
+            --bg-surface: #02090A;
+            --text-main: #FFFFFF;
+            --accent: #36F4A4; /* Neon Green */
+            --accent-light: #36F4A4;
+            --border: #1E2C31;
+            --terminal-bg: #061A1C;
+            --terminal-text: #FFFFFF;
+            --terminal-highlight: #36F4A4; /* 霓虹绿光标 */
+            --link-blue: #3860BE; 
+        }
+
+        body {
+            background-color: var(--bg-canvas);
+            color: var(--text-main);
+            font-family: 'Sofia Sans', Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px 40px 0;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .toggle-btn {
+            background: var(--bg-surface);
+            border: 1.5px solid var(--border);
+            color: var(--text-main);
+            padding: 8px 18px;
+            border-radius: var(--radius-button);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .toggle-btn:hover { border-color: var(--accent); }
+
+        header {
+            padding: 20px 40px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: left;
+        }
+
+        .eyebrow {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.56px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* 顶部图标跟随系统色 */
+        .eyebrow::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            margin-right: 8px;
+            transition: background-color 0.4s ease;
+        }
+
+        h1 {
+            font-size: 64px;
+            font-weight: 500;
+            line-height: 1;
+            letter-spacing: -1.28px;
+            margin: 0;
+        }
+
+        .main-content {
+            padding: 0 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .drop-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .orbital-arc {
+            position: absolute;
+            top: -20px;
+            right: 80px;
+            width: 240px;
+            height: 120px;
+            border-top: 1.5px solid var(--accent-light);
+            border-radius: 50% 50% 0 0;
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        #drop-zone {
+            position: relative;
+            z-index: 1;
+            background: var(--bg-surface);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-container);
+            padding: 100px 40px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: rgba(0, 0, 0, 0.04) 0px 4px 24px 0px;
+            transition: all 0.3s ease;
+        }
+
+        #drop-zone.hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        #drop-zone p { font-size: 24px; font-weight: 500; margin: 0 0 10px 0; }
+        #ui-drop-hint { font-size: 16px; color: var(--link-blue); }
+
+        .controls {
+            display: flex;
+            justify-content: flex-start;
+            gap: 16px;
+            margin: 40px 0;
+        }
+
+        .btn-primary {
+            background: var(--text-main);
+            color: var(--bg-canvas);
+            border: none;
+            padding: 12px 32px;
+            border-radius: var(--radius-button);
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .btn-secondary {
+            background: var(--bg-surface);
+            border: 1.5px solid var(--text-main);
+            color: var(--text-main);
+            padding: 12px 32px;
+            border-radius: var(--radius-button);
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .terminal-container {
+            flex-grow: 1;
+            background: var(--terminal-bg);
+            padding: 40px 0 20px;
+            color: var(--terminal-text);
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            transition: background-color 0.4s ease;
+        }
+
+        .terminal-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 40px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .terminal-header {
+            font-size: 36px;
+            font-weight: 500;
+            margin-bottom: 32px;
+            letter-spacing: -0.72px;
+        }
+
+        #terminal {
+            flex-grow: 1;
+            font-family: 'Sofia Sans', monospace;
+            font-size: 15px;
+            line-height: 1.7;
+            overflow-y: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 24px;
+        }
+
+        /* 竖向跳动光标 */
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background-color: var(--terminal-highlight);
+            vertical-align: middle;
+            margin-left: 4px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .copyright {
+            font-size: 12px;
+            opacity: 0.5;
+            text-align: right;
+            padding-top: 20px;
+            font-weight: 450;
+            color: var(--terminal-text);
+        }
+
+        .log-line { margin-bottom: 8px; font-weight: 450; opacity: 0.9; }
+        .log-success { color: var(--terminal-highlight); opacity: 1; }
+        .log-link { color: inherit; text-decoration: underline; margin-left: 10px; }
+
+        #file-input { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <button class="toggle-btn" onclick="toggleLanguage()" id="lang-toggle">English</button>
+        <button class="toggle-btn" onclick="toggleTheme()" id="theme-toggle">Dark Mode</button>
+    </div>
+
+    <header>
+        <div class="eyebrow" id="ui-eyebrow">Services</div>
+        <h1 id="ui-title">PDF to Markdown <br>Conversion Tool.</h1>
+    </header>
+
+    <div class="main-content">
+        <div class="drop-wrapper">
+            <div class="orbital-arc"></div>
+            <div id="drop-zone">
+                <p id="ui-drop-title">Ready to analyze.</p>
+                <span id="ui-drop-hint">Click or drag PDF assets here</span>
+                <input type="file" id="file-input" multiple accept=".pdf">
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="run-btn" class="btn-primary" disabled>Explore files</button>
+            <button id="download-all-btn" class="btn-secondary" style="display: none;">Collect all (ZIP)</button>
+        </div>
+    </div>
+
+    <div class="terminal-container">
+        <div class="terminal-inner">
+            <div class="terminal-header" id="ui-term-head">We’re here to process your data.</div>
+            <div id="terminal">
+                <div id="log-content-wrapper">
+                    <span id="log-content"></span><span class="cursor"></span>
+                </div>
+            </div>
+            <div class="copyright">© Hong 2026</div>
+        </div>
+    </div>
+
+<script>
+    const i18n = {
+        zh: {
+            eyebrow: "服务 / Services",
+            title: "PDF 导出为 <br>Markdown 格式.",
+            dropTitle: "准备好分析了。",
+            dropHint: "点击或拖拽 PDF 资源到此处",
+            runBtn: "开始转换 / Explore files",
+            zipBtn: "下载全集 / Collect All (ZIP)",
+            termHead: "我们正在处理您的数据。",
+            langBtn: "English",
+            themeBtn: "暗色模式",
+            logReady: "系统：核心环境已加载。等待序列中...",
+            logLoaded: "已加载 {n} 个文件。点击 Explore files 开始。",
+            logProcessing: "正在分析: ",
+            logSuccess: "成功: ",
+            logComplete: "所有任务已完成。"
+        },
+        en: {
+            eyebrow: "Services",
+            title: "PDF to Markdown <br>Conversion Tool.",
+            dropTitle: "Ready to analyze.",
+            dropHint: "Click or drag PDF assets here",
+            runBtn: "Explore files",
+            zipBtn: "Collect All (ZIP)",
+            termHead: "We’re here to process your data.",
+            langBtn: "中文",
+            themeBtn: "Light Mode",
+            logReady: "System: Core environment loaded. Standing by...",
+            logLoaded: "Loaded {n} file(s). Select 'Explore files' to begin.",
+            logProcessing: "Analyzing: ",
+            logSuccess: "Success: ",
+            logComplete: "All sequences finalized."
+        }
+    };
+
+    let curLang = 'en';
+    let curTheme = 'light';
+
+    function toggleLanguage() {
+        curLang = curLang === 'zh' ? 'en' : 'zh';
+        updateUI();
+    }
+
+    function toggleTheme() {
+        curTheme = curTheme === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', curTheme);
+        updateUI(); // 重新更新 UI 以同步按钮文字
+    }
+
+    function updateUI() {
+        const t = i18n[curLang];
+        document.getElementById('ui-eyebrow').innerText = t.eyebrow;
+        document.getElementById('ui-title').innerHTML = t.title;
+        document.getElementById('ui-drop-title').innerText = t.dropTitle;
+        document.getElementById('ui-drop-hint').innerText = t.dropHint;
+        document.getElementById('run-btn').innerText = t.runBtn;
+        document.getElementById('download-all-btn').innerText = t.zipBtn;
+        document.getElementById('ui-term-head').innerText = t.termHead;
+        document.getElementById('lang-toggle').innerText = t.langBtn;
+        
+        // 确保切换模式后按钮文字也正确
+        document.getElementById('theme-toggle').innerText = curTheme === 'light' ? 
+            (curLang === 'zh' ? "暗色模式" : "Dark Mode") : 
+            (curLang === 'zh' ? "亮色模式" : "Light Mode");
+    }
+
+    const pdfjsLib = window['pdfjs-dist/build/pdf'];
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-input');
+    const runBtn = document.getElementById('run-btn');
+    const downloadAllBtn = document.getElementById('download-all-btn');
+    const logContent = document.getElementById('log-content');
+
+    let selectedFiles = [];
+    let convertedFiles = [];
+
+    function log(msg, type = 'info') {
+        const div = document.createElement('div');
+        div.className = 'log-line';
+        if (type === 'success') div.classList.add('log-success');
+        div.innerHTML = `• ${msg}`;
+        logContent.appendChild(div);
+        document.getElementById('terminal').scrollTop = document.getElementById('terminal').scrollHeight;
+    }
+
+    dropZone.onclick = () => fileInput.click();
+    fileInput.onchange = (e) => handleFiles(e.target.files);
+    dropZone.ondragover = (e) => { e.preventDefault(); dropZone.classList.add('hover'); };
+    dropZone.ondragleave = () => dropZone.classList.remove('hover');
+    dropZone.ondrop = (e) => { e.preventDefault(); dropZone.classList.remove('hover'); handleFiles(e.dataTransfer.files); };
+
+    function handleFiles(files) {
+        selectedFiles = Array.from(files).filter(f => f.type === 'application/pdf');
+        if (selectedFiles.length > 0) {
+            log(i18n[curLang].logLoaded.replace('{n}', selectedFiles.length), 'success');
+            runBtn.disabled = false;
+        }
+    }
+
+    runBtn.onclick = async () => {
+        runBtn.disabled = true;
+        downloadAllBtn.style.display = 'none';
+        convertedFiles = [];
+        const t = i18n[curLang];
+
+        for (const file of selectedFiles) {
+            log(t.logProcessing + file.name.toUpperCase());
+            try {
+                const mdContent = await convertPdfToMd(file);
+                const mdName = file.name.replace(/\.[^/.]+$/, "") + ".md";
+                convertedFiles.push({ name: mdName, content: mdContent });
+                
+                const blob = new Blob([mdContent], { type: 'text/markdown' });
+                const url = URL.createObjectURL(blob);
+                log(`${t.logSuccess} ${mdName} <a href="${url}" download="${mdName}" class="log-link">Download MD</a>`, 'success');
+            } catch (err) {
+                log(`Error: ${err.message}`);
+            }
+        }
+        log(t.logComplete);
+        if (convertedFiles.length > 0) {
+            downloadAllBtn.style.display = 'inline-block';
+        }
+        runBtn.disabled = false;
+    };
+
+    async function convertPdfToMd(file) {
+        const arrayBuffer = await file.arrayBuffer();
+        const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
+        let fullText = "";
+        for (let i = 1; i <= pdf.numPages; i++) {
+            const page = await pdf.getPage(i);
+            const content = await page.getTextContent();
+            fullText += `## Page ${i}\n\n`;
+            let lastY = -1;
+            for (const item of content.items) {
+                if (lastY !== -1 && Math.abs(lastY - item.transform[5]) > 2) fullText += "\n";
+                fullText += item.str;
+                lastY = item.transform[5];
+            }
+            fullText += "\n\n";
+        }
+        return fullText;
+    }
+
+    downloadAllBtn.onclick = async () => {
+        const zip = new JSZip();
+        convertedFiles.forEach(f => zip.file(f.name, f.content));
+        const blob = await zip.generateAsync({ type: "blob" });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = "mastercard_collection.zip";
+        a.click();
+    };
+
+    updateUI();
+    log(i18n[curLang].logReady);
+</script>
+</body>
+</html>
