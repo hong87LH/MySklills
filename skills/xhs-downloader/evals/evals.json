@@ -1,0 +1,25 @@
+
+{
+  "skill_name": "xhs-downloader",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "下载这个小红书链接 https://www.xiaohongshu.com/explore/abc123",
+      "expected_output": "识别为单个小红书链接下载，创建xhs_downloader目录，调用single_downloader.py",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "用urls.txt批量下载小红书链接，不需要cookies",
+      "expected_output": "识别为批量下载，从urls.txt读取URL，使用url_cleaner.py清洗，调用batch_downloader.py，不询问cookies",
+      "files": ["urls.txt"]
+    },
+    {
+      "id": 3,
+      "prompt": "下载这个markdown文件里的小红书链接",
+      "expected_output": "识别为批量下载，从markdown文件提取URL，清洗后批量下载",
+      "files": ["notes.md"]
+    }
+  ]
+}
+
