@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="light" name="color-scheme"/>
+<title>AI 电商服装生图｜日常生产 SOP 手册 v0.4</title>
+<style>
+:root{--bg:#f2f5f8;--paper:#fff;--ink:#182435;--muted:#607187;--line:#dce4ec;--blue:#2867c9;--dark:#12263b;--aqua:#12a997;--aquaBg:#e6f7f3;--amber:#d18a20;--amberBg:#fff5e5;--rose:#c96067;--roseBg:#fff0f0;--sidebar:274px;--rad:17px;--shadow:0 9px 30px rgba(20,41,63,.055)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:30px}body{margin:0;font-family:Inter,"Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.78;font-size:14px}button,input{font:inherit}a{color:inherit;text-decoration:none}button{cursor:pointer}p{margin:7px 0 13px}strong{font-weight:730}::selection{background:#b6dff3}small{color:var(--muted)}h1,h2,h3,h4{line-height:1.36;letter-spacing:-.025em}h1{font-size:clamp(32px,4vw,52px);letter-spacing:-.06em;margin:16px 0}h2{font-size:26px;margin:0 0 14px}h3{font-size:19px;margin:0 0 12px}h4{font-size:15px;margin:12px 0 6px}ul,ol{padding-left:23px;margin:9px 0 14px}li{margin:4px 0}code{font-family:Consolas,monospace;font-size:.92em;background:#ecf3f8;padding:2px 5px;border-radius:5px}table{border-collapse:collapse;width:100%;font-size:13px}th,td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#eff4f8;font-size:12px;color:#52667a;letter-spacing:.02em}td:first-child{font-weight:650}tr:last-child td{border-bottom:0}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px;margin:14px 0 18px}kbd{padding:3px 7px;background:#ecf3f8;border:1px solid #d7e1ea;border-radius:6px}.sidebar{position:fixed;inset:0 auto 0 0;width:var(--sidebar);padding:26px 17px;overflow-y:auto;background:var(--dark);color:#e6eef5;z-index:20;scrollbar-width:thin}.brand{display:flex;gap:10px;align-items:center;padding:6px 9px 18px;border-bottom:1px solid #344659}.brand-mark{display:grid;place-items:center;background:#20baa5;color:#082e2c;font-weight:900;font-size:17px;border-radius:12px;width:42px;height:42px;flex:0 0 42px}.brand b{font-size:13px;letter-spacing:.06em}.brand small{display:block;font-size:11px;color:#97aebf;line-height:1.4;margin-top:2px}.nav-heading{font-size:10px;letter-spacing:.15em;color:#8199ad;padding:24px 13px 6px}.nav-link{display:flex;gap:10px;align-items:baseline;padding:9px 11px;border-radius:9px;color:#b9c9d7;font-size:12px;line-height:1.45;margin:2px 0}.nav-link:hover,.nav-link.active{background:#234159;color:#fff}.nav-link .num{color:#43cdb6;font-family:monospace;font-size:11px;min-width:23px}.sidebar-foot{font-size:11px;color:#96adbc;border-top:1px solid #344659;margin-top:20px;padding:15px 11px}.main{margin-left:var(--sidebar);min-height:100vh}.top-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:19px min(4.2vw,60px);border-bottom:1px solid #e0e8ef;background:rgba(255,255,255,.74)}.breadcrumb{color:#667d91;font-size:12px}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid #d9e3ed;background:white;color:#2e4659;border-radius:9px;padding:8px 12px;font-size:12px;font-weight:650;transition:.15s;white-space:nowrap}.btn:hover{border-color:#9caec0;transform:translateY(-1px)}.btn.primary{background:#1c557f;border-color:#1c557f;color:white}.btn.soft{background:#e7f8f4;color:#117967;border-color:#c6eee4}.content{max-width:1270px;margin:auto;padding:32px min(4.2vw,60px) 95px}.hero{border-radius:25px;color:white;position:relative;overflow:hidden;background:linear-gradient(115deg,#15334b 0%,#123b54 52%,#175f60 100%);padding:43px 45px 35px;box-shadow:var(--shadow)}.hero:after{content:"";position:absolute;right:-100px;top:-145px;width:445px;height:445px;border:1px solid rgba(255,255,255,.14);border-radius:50%;box-shadow:0 0 0 80px rgba(255,255,255,.025),0 0 0 160px rgba(255,255,255,.018);pointer-events:none}.eyebrow{letter-spacing:.18em;text-transform:uppercase;font-size:11px;font-weight:850;color:#43d8c1}.hero p{font-size:15px;max-width:720px;color:#d3e4eb;position:relative}.hero .sub{font-size:17px;line-height:1.8;max-width:780px}.hero-meta{margin-top:24px;display:flex;gap:10px;flex-wrap:wrap}.chip{font-size:11px;border-radius:100px;border:1px solid #ffffff44;padding:4px 12px;background:#ffffff15;color:#d4f2ed}.hero h1{position:relative}.hero strong{color:#fff}.section{margin-top:34px;scroll-margin-top:28px}.sectionhead{display:flex;align-items:flex-start;gap:16px;margin-bottom:17px}.secnum{display:inline-grid;place-items:center;background:#e0eff9;color:#236093;font-size:12px;font-weight:850;min-width:44px;height:44px;border-radius:13px}.sectionhead p{margin:5px 0;color:var(--muted);font-size:13px}.panel{border:1px solid var(--line);border-radius:var(--rad);background:var(--paper);padding:23px 25px;box-shadow:var(--shadow);margin:14px 0}.panel.flat{box-shadow:none}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.mini{padding:19px 19px}.mini h3{font-size:17px}.label{display:inline-block;letter-spacing:.08em;text-transform:uppercase;font-size:10px;color:#287b82;font-weight:900;margin-bottom:6px}.tag{display:inline-flex;padding:3px 9px;border-radius:100px;background:#eaf2fa;color:#2c6389;font-size:11px;font-weight:750;white-space:nowrap}.tag.green{background:var(--aquaBg);color:#138574}.tag.amber{background:var(--amberBg);color:#a87317}.tag.rose{background:var(--roseBg);color:#b64f57}.quiet{color:var(--muted)}.callout{border-left:4px solid #27a995;background:#eff9f6;padding:14px 17px;border-radius:0 10px 10px 0;margin:15px 0;color:#234c48}.callout.warn{border-left-color:#dfa03e;background:#fff8ed;color:#624f2b}.callout.red{border-left-color:#ca6972;background:#fff4f4;color:#7c4147}.flow{display:grid;gap:0;max-width:750px;margin:10px auto}.flow-step{position:relative;background:white;border:1px solid var(--line);border-radius:12px;padding:14px 17px;display:flex;gap:14px;align-items:flex-start}.flow-index{color:var(--blue);font-size:11px;font-weight:850;background:#e9f1fb;border-radius:8px;padding:4px 8px;flex:none}.flow-step b{display:block;line-height:1.5}.flow-step p{color:var(--muted);font-size:12px;margin:2px 0 0}.arrow{text-align:center;height:25px;display:grid;place-items:center;color:#7899ac;font-size:20px}.flow-step.highlight{border-color:#8fdccf;background:#ecf9f6}.flow-step.final{border-color:#96b3d3;background:#edf4fb}.fork{display:grid;grid-template-columns:1fr 1fr;gap:16px}.route-card{border:1px solid var(--line);border-radius:14px;padding:20px;background:white}.route-card.selected{border-color:#39b5a3;background:#f1fbf8;box-shadow:inset 0 0 0 1px #39b5a3}.route-label{letter-spacing:.1em;text-transform:uppercase;font-size:10px;color:#208b7d;font-weight:850}.route-card h3{margin:7px 0}.route-card p,.route-card li{font-size:12px}.stage{border:1px solid var(--line);background:#fff;border-radius:16px;margin:17px 0;overflow:hidden;box-shadow:var(--shadow)}.stage-head{display:flex;gap:14px;align-items:center;padding:19px 22px;background:linear-gradient(90deg,#f1f7fc,white);border-bottom:1px solid var(--line)}.stage-n{display:grid;place-items:center;min-width:46px;height:46px;background:#1d5b82;color:white;border-radius:13px;font-size:14px;font-weight:850}.stage-head h3{margin:0;font-size:19px}.stage-head p{margin:4px 0 0;color:var(--muted);font-size:12px}.stage-body{padding:23px}.stage-columns{display:grid;grid-template-columns:1fr 1.1fr 1fr;gap:20px}.stage-columns>div:not(:first-child){border-left:1px solid var(--line);padding-left:20px}.stage-columns h4{font-size:12px;letter-spacing:.06em;color:#38677f;text-transform:uppercase;margin:0 0 6px}.stage-columns p,.stage-columns li{font-size:12.5px}.stage-end{border-top:1px solid var(--line);background:#f8fafc;padding:11px 22px;font-size:12px;color:#526b7a}.stage-end b{color:#265675}.progress-card{margin:16px 0 8px;background:#fff;border:1px solid var(--line);padding:21px;border-radius:16px;box-shadow:var(--shadow)}.progress-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.progress-value{font-size:24px;font-weight:850;color:#168d7e;letter-spacing:-.04em}.progress-track{height:8px;background:#eaf0f2;border-radius:100px;overflow:hidden;margin:11px 0}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#1d9a8b,#5ccfb5);transition:width .22s}.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 17px}.check{display:flex;gap:10px;align-items:flex-start;border:1px solid #e3ebf1;border-radius:9px;padding:10px 12px;font-size:12px;line-height:1.62;background:#fff;cursor:pointer}.check input{accent-color:#129b89;margin:3px 0 0;flex:none}.check:has(input:checked){background:#edf9f5;border-color:#bce8d9;color:#266755}.decision{border:1px solid #b2d7dc;background:#f0fafa;border-radius:15px;padding:19px 22px}.decision input[type=radio]{accent-color:#189c91}.choice{display:flex;gap:10px;align-items:flex-start;padding:10px;border-radius:8px;cursor:pointer}.choice:hover{background:#e1f5f2}.decision-out{background:white;border:1px solid #cfe9e7;border-radius:11px;padding:15px 18px;margin-top:12px}.decision-out h4{margin:0 0 5px;color:#0d746c}.model-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.model-card{border:1px solid var(--line);border-radius:13px;padding:19px;background:#fff}.model-card h3{font-size:17px;margin:6px 0}.model-card p,.model-card li{font-size:12.5px}.recipe{border:1px solid var(--line);border-radius:15px;margin:14px 0;background:#fff;overflow:hidden}.recipe summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:17px 20px;font-weight:780;user-select:none}.recipe summary::-webkit-details-marker{display:none}.recipe summary:after{content:"＋";margin-left:auto;color:#4c7995;font-size:20px}.recipe[open] summary:after{content:"−"}.recipe .recipe-body{padding:0 21px 20px;color:#3b5061}.recipe small{display:block}.recipe h4{color:#245977}.template{border:1px solid #d7e3ed;background:#f7fafc;border-radius:13px;padding:16px 18px;margin:14px 0;position:relative;white-space:pre-wrap;font-size:12.5px;color:#294558}.template .copy{position:absolute;right:10px;top:10px}.template pre{white-space:pre-wrap;overflow-wrap:anywhere;font-family:inherit;margin:20px 0 0}.search{border:1px solid #d9e4ed;border-radius:10px;padding:9px 12px;min-width:200px;background:#fff;font-size:12px}.searchbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:16px 0}.search-note{color:#697d8e;font-size:11px}footer{margin-top:35px;border-top:1px solid #d4e0e8;padding:21px 0;color:#708495;font-size:12px}.hidden-by-search{display:none!important}#mobileMenu{display:none}.asset-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.asset{padding:19px;border:1px solid var(--line);border-radius:13px;background:white}.asset strong{display:block;color:#1c5681;font-size:18px;margin:6px 0}.asset p{font-size:12px;color:#5d7080}.status{font-size:10px;font-weight:850;color:#168679;letter-spacing:.07em}.status.orange{color:#ba801f}.kbd-note{font-size:11px;color:#698398}.no-print{}.chapter-divider{margin:26px 0;border:0;border-top:1px dashed #ccdbe4}.notice{background:#f9f1e6;border:1px solid #f0d7b6;border-radius:12px;padding:16px 18px;color:#755a2e}.pillrow{display:flex;flex-wrap:wrap;gap:7px}.pill{font-size:11px;padding:4px 10px;border:1px solid #dce5ed;border-radius:100px;background:#f8fafc;color:#536b80}
+@media(max-width:1230px){.stage-columns{grid-template-columns:1fr 1fr}.stage-columns>div:last-child{grid-column:1/-1;border-left:0;border-top:1px solid var(--line);padding-left:0;padding-top:13px}.grid.three,.model-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:900px){:root{--sidebar:245px}.content{padding:25px 25px 70px}.top-actions{padding:15px 25px}.hero{padding:33px}}@media(max-width:760px){.sidebar{transform:translateX(-100%);transition:.22s;width:min(290px,88vw)}.sidebar.open{transform:translateX(0)}.main{margin:0}.content{padding:16px 14px 60px}.hero{padding:30px 22px;border-radius:17px}.top-actions{padding:11px 15px;gap:8px}.breadcrumb{display:none}#mobileMenu{display:inline-flex}.grid,.grid.three,.fork,.asset-grid,.model-cards,.stage-columns,.checks{grid-template-columns:1fr}.stage-columns>div:not(:first-child){border-left:0;border-top:1px solid var(--line);padding-left:0;padding-top:12px}.stage-columns>div:last-child{grid-column:auto}.panel{padding:19px}.stage-body{padding:18px}.stage-head{padding:15px}.search{width:100%}h2{font-size:23px}.actions{justify-content:flex-end}.btn{padding:7px 9px;font-size:11px}.section{margin-top:29px}}@media print{*{box-shadow:none!important}body{background:#fff;color:#000;font-size:10.5pt}.sidebar,.top-actions,.no-print,.copy,.searchbar{display:none!important}.main{margin:0}.content{max-width:none;padding:0}.hero{background:white!important;color:#000;border:2px solid #888;page-break-after:avoid}.hero p,.hero .sub,.eyebrow,.chip{color:#222!important}.hero:after{display:none}.section{page-break-before:auto}.panel,.stage,.recipe,.asset,.model-card,.route-card{break-inside:avoid;background:white!important;border-color:#aaa}.grid,.grid.three,.asset-grid,.model-cards{grid-template-columns:1fr 1fr}.sectionhead{break-after:avoid}.tag{color:#222;background:#eee}.checks{grid-template-columns:1fr 1fr}.flow-step{break-inside:avoid}.recipe-body{display:block!important}details:not([open]) .recipe-body{display:block!important}a{color:#000}th{background:#eee!important}footer{font-size:9pt}.section{margin-top:23px}}
+
+.prompt-note{margin:16px 0 18px;padding:14px 16px;border:1px solid #d8e7f7;background:#f4f9ff;border-radius:14px;color:#27415f}.prompt-note b{color:#173659}.prompt-stack{display:grid;gap:12px;margin-top:14px}.prompt-box{border:1px solid var(--line);background:#fbfcfe;border-radius:14px;padding:14px 15px;box-shadow:0 3px 10px rgba(18,38,59,.03)}.prompt-head{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px}.prompt-kicker{display:inline-block;padding:3px 9px;border-radius:999px;background:#eaf1fb;color:#1f58b0;font-size:12px;font-weight:700}.prompt-head h4{margin:0;font-size:15px}.prompt-box p{margin:0 0 10px}.prompt-box pre{margin:0;white-space:pre-wrap;word-break:break-word;overflow:auto;background:#162434;color:#eaf2fb;border-radius:12px;padding:12px 13px;font-size:12.5px;line-height:1.62}.prompt-box code{font-family:ui-monospace,SFMono-Regular,Consolas,Monaco,monospace}.prompt-tip{margin-top:9px;color:var(--muted);font-size:12px}</style>
+</head>
+<body>
+<aside aria-label="手册目录" class="sidebar" id="sidebar">
+<div class="brand"><div class="brand-mark">SOP</div><div><b>ECOM IMAGE LAB</b><small>AI 电商服装图像生产<br/>日常工作流手册 · v0.3</small></div></div>
+<div class="nav-heading">总览 / OVERVIEW</div>
+<a class="nav-link" href="#overview"><span class="num">00</span>使用说明与核心原则</a>
+<a class="nav-link" href="#route"><span class="num">01</span>判断新款 / 旧品路径</a>
+<a class="nav-link" href="#assets"><span class="num">02</span>种子图 / 母图 / 裂变图</a>
+<div class="nav-heading">生产 / PRODUCTION</div>
+<a class="nav-link" href="#sop"><span class="num">03</span>八阶段完整 SOP</a>
+<a class="nav-link" href="#gate"><span class="num">04</span>三道验收关口</a>
+<a class="nav-link" href="#branch"><span class="num">05</span>姿势 / 构图 / 机位裂变</a>
+<div class="nav-heading">修复 / REPAIR</div>
+<a class="nav-link" href="#repair"><span class="num">06</span>面部 / 校色 / 工艺修复</a>
+<a class="nav-link" href="#models"><span class="num">07</span>模型与工具分工</a>
+<div class="nav-heading">交付 / DELIVERY</div>
+<a class="nav-link" href="#qa"><span class="num">08</span>最终审核与返工路径</a>
+<a class="nav-link" href="#files"><span class="num">09</span>文件与版本管理</a>
+<a class="nav-link" href="#templates"><span class="num">10</span>可复制任务记录模板</a>
+<div class="sidebar-foot">离线单文件 HTML · 可打印<br/>勾选状态仅保存在当前浏览器本地</div>
+</aside>
+<main class="main">
+<div class="top-actions no-print"><div><button aria-label="打开目录" class="btn" id="mobileMenu">☰ 目录</button><span class="breadcrumb">设计流程 / 日常手册 / AI 电商服装生图 SOP</span></div><div class="actions"><button class="btn" id="openAll">展开修复章节</button><button class="btn" id="resetChecks">清空勾选</button><button class="btn primary" id="printDoc">打印 / 存 PDF</button></div></div>
+<div class="content">
+<header class="hero" id="overview">
+<span class="eyebrow">STANDARD OPERATING PROCEDURE · 2026</span>
+<h1>AI 电商服装生图<br/>日常生产 SOP</h1>
+<p class="sub">从基础商品素材到种子图、场景母图、系列裂变、商业精修与完稿归档。将个人实战经验整理成可以审核、复用、交接的工作流程。</p>
+<div class="hero-meta"><span class="chip">手册 v0.4 · 修复工具箱提示词增强版</span><span class="chip">新款标准路径 + 旧品快速路径</span><span class="chip">3 道验收关口</span><span class="chip">模型与工具按任务选用</span><span class="chip">非 Skill 开发文档</span><span class="chip">常用修复提示词参考</span></div>
+</header>
+<section aria-label="核心原则" class="section">
+<div class="grid three">
+<div class="panel mini"><span class="label">PRINCIPLE / 01</span><h3>先对商品，再做氛围</h3><p class="quiet">优先保证版型、颜色、印花、工艺、人物比例；场景和视觉创意在正确的商品基准上展开。</p></div>
+<div class="panel mini"><span class="label">PRINCIPLE / 02</span><h3>先锁母图，再批量裂变</h3><p class="quiet">未经验收的种子图与场景图不能直接大量派生，避免把系统性问题传播到全部成片。</p></div>
+<div class="panel mini"><span class="label">PRINCIPLE / 03</span><h3>修哪里，尽量只动哪里</h3><p class="quiet">面部结构、商品印花、色彩偏差分别处理；不要为修一条缝线重生成整套服装。</p></div>
+</div>
+<div class="callout"><strong>如何使用本手册：</strong>每单先选新款/旧品路径，再沿 8 阶段执行；每到 Gate A/B/C 勾选审核项。遇到异常进入修复章节，不需要从头重跑所有步骤。蓝色内容表示行动，绿色表示已确认资产，琥珀色表示待验收或可能返工。</div>
+</section>
+<section class="section" id="route">
+<div class="sectionhead"><span class="secnum">01</span><div><h2>先判断路径：新款还是旧品翻单？</h2><p>不是所有需求都从种子图开始，合格的旧图本身可以成为高价值资产。</p></div></div>
+<div class="fork">
+<article class="route-card" id="newRoute"><span class="route-label">PATH A / STANDARD</span><h3>新款 · 标准生产路径</h3><p>适用：新上市款、首次为该款建立真人穿着图、现有图片不足以确认版型和人物形象。</p><ol><li>准备静物图、模特与身材比例</li><li>生成柔光纯色背景全身种子图</li><li>种子图局部重修，确保商品准确</li><li>进入场景、精修并确认正式母图</li><li>姿势裂变、逐张精修、交付</li></ol><span class="tag">不能跳过 Gate A</span></article>
+<article class="route-card" id="oldRoute"><span class="route-label">PATH B / FAST TRACK</span><h3>旧品 · 快速翻单路径</h3><p>适用：已有可信模特图，服装与商品信息仍然正确，希望快速翻新场景或追加更多 pose。</p><ol><li>复核旧图、旧款与当次商品是否一致</li><li>视需要抠出干净主体并局部修正</li><li>直接用旧图进入母图确认环节</li><li>按目标场景或原场景扩展裂变</li><li>逐张精修、交付</li></ol><span class="tag green">可跳过初建种子图</span></article>
+</div>
+<div class="callout warn"><strong>旧品快速路径的入口门槛：</strong>旧图不是“有就能用”。如果同货号发生版型、面料、颜色、印花或工艺调整，必须先纠正不一致项；不得让过时商品图成为新成片的真实商品基准。</div>
+<div class="panel flat"><h3>从判断到交付：总流程</h3>
+<div class="flow"><div class="flow-step"><span class="flow-index">START</span><div><b>核对需求与产品状态</b><p>新款？旧品？目标渠道与使用场景？是否已有可信人物与商品资产？</p></div></div><div class="arrow">↓</div>
+<div class="fork"><div class="flow-step"><span class="flow-index">A</span><div><b>新款：构建种子图</b><p>输入商品＋模特＋比例 → 全身种子图 → 校对商品</p></div></div><div class="flow-step"><span class="flow-index">B</span><div><b>旧品：验证旧图</b><p>旧图复核 → 必要局部修正 → 可净化背景</p></div></div></div><div class="arrow">↓</div>
+<div class="flow-step"><span class="flow-index">MERGE</span><div><b>融合目标场景，建立基础站立图</b><p>干净人物素材＋场景＋细节图；核对机位、尺度、光影</p></div></div><div class="arrow">↓</div>
+<div class="flow-step highlight"><span class="flow-index">GATE B</span><div><b>修正并锁定场景母图</b><p>此图成为后续系列的共同视觉基准；大批量裂变从这里开始</p></div></div><div class="arrow">↓</div>
+<div class="flow-step"><span class="flow-index">SPLIT</span><div><b>按变化幅度决定文字控制还是白模＋文字</b><p>分别规划每张姿势、景别、相机角度及必要空间重建</p></div></div><div class="arrow">↓</div>
+<div class="flow-step final"><span class="flow-index">OUTPUT</span><div><b>逐张修色、修瑕疵、修印花工艺 → 验收 → 输出归档</b><p>出现局部问题进入对应修复流程，尽量不重跑整套</p></div></div></div>
+</div>
+</section>
+<section class="section" id="assets">
+<div class="sectionhead"><span class="secnum">02</span><div><h2>三个核心资产：种子图、场景母图、裂变图</h2><p>明确每张图的职责，避免“最新生成的图”自动变成新的参考标准。</p></div></div>
+<div class="asset-grid">
+<div class="asset"><span class="status">ASSET 01 / SEED</span><strong>种子图</strong><p>柔光纯色背景、全身站姿，用于建立模特身份、身材比例、商品款式及基础穿着关系。</p><p><b>判断：</b>商品与人是否正确？不承担复杂场景氛围任务。</p></div>
+<div class="asset"><span class="status">ASSET 02 / MASTER</span><strong>场景母图</strong><p>主体进入正式场景并经过校色、瑕疵修复和光影融合的全身基础站立图。</p><p><b>判断：</b>系列拍摄空间、色调、人物与商品基准是否稳定？</p></div>
+<div class="asset"><span class="status">ASSET 03 / DERIVED</span><strong>裂变图</strong><p>基于正式母图产生的不同姿势、景别、机位和构图，每张都须独立审核及精修。</p><p><b>判断：</b>允许摄影关系变化，但商品真实细节和身份不漂移。</p></div>
+</div>
+<div class="panel"><h3>素材净化 / 提供白底抠图主体</h3><p>人物或商品融合入新场景时，原图中的家具、绿植、墙面、杂物、其他人物和背景光影可能成为无关信息。<strong>优先尝试将主体单独整理成干净的白底抠图参考或透明素材</strong>，再与目标背景、商品细节参考共同输入。</p>
+<div class="grid"><div class="callout"><b>白底抠图图</b><br/>适合作为干净视觉参考，减少旧场景污染；它本身仍然有白色像素，不是真透明文件。</div><div class="callout"><b>真实透明 PNG</b><br/>适合实际分层、合成及需要 Alpha 的流程；生成结果应检查 RGBA / Alpha，不能凭 PNG 扩展名判断。</div></div>
+<p class="quiet">如果原图的接地阴影、家具接触和人物与空间关系很有价值，可同时提供原图作为空间参考；净化素材是优先手段，不是每张图强制抠图。</p>
+</div>
+</section>
+<section class="section" id="sop">
+<div class="sectionhead"><span class="secnum">03</span><div><h2>八阶段生产 SOP</h2><p>每阶段包含输入、具体操作、输出以及失败时的回退位置。</p></div></div>
+<div class="searchbar no-print"><span class="search-note">可搜索阶段、修复模块、模型及验收项</span><input aria-label="搜索手册内容" class="search" id="search" placeholder="搜索：印花 / 换脸 / 母图 / 白模 …" type="search"/><button class="btn" id="clearSearch">清除搜索</button></div>
+<article class="stage" data-searchable=""><header class="stage-head"><span class="stage-n">01</span><div><h3>任务与基础素材准备</h3><p>先确认商品事实和目标用途，不在生成后才补找参考。</p></div><span class="tag">新款 / 旧品共用</span></header><div class="stage-body"><div class="stage-columns"><div><h4>输入 INPUT</h4><ul><li>商品静物图：整体、颜色、印花、领口/袖口/裤脚等工艺</li><li>模特身份或形象参考、目标身材比例</li><li>目标场景图或场景方向</li><li>使用用途、需要的张数/景别/比例</li></ul></div><div><h4>操作 ACTION</h4><ol><li>核对同货号、同色、同款、同季的商品状态。</li><li>明确哪张图负责人物、哪张负责商品、哪张负责场景。</li><li>判断是否有资格走旧品快线；确认有无可用母图。</li><li>有需要时抠出干净白底/透明主体，去掉不相关背景信息。</li></ol></div><div><h4>输出 / 返工</h4><p><b>输出：</b>素材包＋图片职责记录＋本单生产路径。</p><p><b>不通过：</b>缺商品关键工艺、颜色不确定、参考图职责冲突 → 先补参考，不急于生图。</p></div></div></div><footer class="stage-end">阶段结论：<b>知道这次“谁是什么、穿什么、在哪里拍、要出几张”。</b></footer></article>
+<article class="stage" data-searchable=""><header class="stage-head"><span class="stage-n">02</span><div><h3>生成全身种子图</h3><p>用简单光场确认人物与商品；旧品合格图可跳过。</p></div><span class="tag">新款必做</span></header><div class="stage-body"><div class="stage-columns"><div><h4>输入 INPUT</h4><ul><li>静物商品及细节参考</li><li>模特身份参考、体型比例要求</li><li>简单纯色背景</li></ul></div><div><h4>操作 ACTION</h4><ol><li>优先生成柔光纯色背景、全身基础站立 pose。</li><li>控制人脸/发型、身材、头颈、手脚比例与服装穿着状态。</li><li>保证头顶、衣摆、裤脚和鞋底可检查，不借复杂道具遮挡缺陷。</li></ol></div><div><h4>输出 / 返工</h4><p><b>输出：</b>可用于核实人物和商品的初始种子图。</p><p><b>不通过：</b>整体人物/服装严重失真 → 重生成；局部印花或工艺错误 → 转 03 局部修正。</p></div></div></div><footer class="stage-end">阶段结论：<b>把“人穿这件衣服”建立成易于审核的视觉基准。</b></footer></article>
+<article class="stage" data-searchable=""><header class="stage-head"><span class="stage-n">03</span><div><h3>种子图局部重修 → Gate A</h3><p>先解决商品真实度，再允许进入复杂场景。</p></div><span class="tag amber">种子验收</span></header><div class="stage-body"><div class="stage-columns"><div><h4>输入 INPUT</h4><ul><li>初始种子图</li><li>商品原始静物/局部工艺图</li><li>面部或比例参考（如有）</li></ul></div><div><h4>操作 ACTION</h4><ol><li>针对印花、领口、拼缝、裤脚和颜色做局部修改。</li><li>检查模特身份、头身比、五官、四肢和鞋底完整性。</li><li>对正确区域设“保留”，避免局部修复影响整体款式。</li></ol></div><div><h4>输出 / 返工</h4><p><b>输出：</b>合格种子图，并保留原始商品细节参考。</p><p><b>不通过：</b>衣服整体改款/人物明显不一致 → 退回 02；仅局部问题 → 继续 03。</p></div></div></div><footer class="stage-end">Gate A：<b>人物与商品正确后，才进入正式场景。</b></footer></article>
+<article class="stage" data-searchable=""><header class="stage-head"><span class="stage-n">04</span><div><h3>融合场景：形成全身基础站立图</h3><p>这是从产品基准走向正式商业摄影氛围的阶段。</p></div><span class="tag">场景建立</span></header><div class="stage-body"><div class="stage-columns"><div><h4>输入 INPUT</h4><ul><li>合格种子图；旧品则用复核后的旧图</li><li>目标场景背景图</li><li>必要时白底抠图/透明主体</li><li>细节参考图，继续保护商品</li></ul></div><div><h4>操作 ACTION</h4><ol><li>按图源职责融合人物、商品、目标背景；可借助现有 Skill 表达保留边界。</li><li>优先建立全身自然基础站姿，暂不追求多姿势。</li><li>检查主体大小、机位、地平线、透视、受光、接地阴影与环境反射。</li><li>仅借场景时，不把背景图自带人物与道具误当作指定主体。</li></ol></div><div><h4>输出 / 返工</h4><p><b>输出：</b>正式场景基础站立初稿。</p><p><b>不通过：</b>脸或商品漂移 → 回查 03/旧图基准；机位或视差错 → 重新建立 04 场景关系。</p></div></div></div><footer class="stage-end">阶段结论：<b>人物已经“真的站在”目标场景里，而不是简单贴入。</b></footer></article>
+<article class="stage" data-searchable=""><header class="stage-head"><span class="stage-n">05</span><div><h3>精修并锁定正式场景母图 → Gate B</h3><p>母图是整组裂变的共同标准，必须有版本意识。</p></div><span class="tag amber">母图验收</span></header><div class="stage-body"><div class="stage-columns"><div><h4>输入 INPUT</h4><ul><li>阶段 04 场景初稿</li><li>种子图、人物参考、商品参考</li><li>原场景或调性参考</li></ul></div><div><h4>操作 ACTION</h4><ol><li>优先修明显偏色、肤色异常、背景脏斑及人物贴纸感。</li><li>检查商品款式、印花、工艺在场景融合后有没有再次变化。</li><li>统一主光、阴影、环境色与真实摄影质感。</li><li>确认一张正式 Scene Master，并锁定其版本供裂变引用。</li></ol></div><div><h4>输出 / 返工</h4><p><b>输出：</b>正式场景母图（建议保留未覆盖版本）。</p><p><b>不通过：</b>全局色调或空间关系错 → 重修 04/05；不可把它扩散为一组问题图。</p></div></div></div><footer class="stage-end">Gate B：<b>没有合格母图，不进入批量裂变。</b></footer></article>
+<article class="stage" data-searchable=""><header class="stage-head"><span class="stage-n">06</span><div><h3>姿势、景别和机位裂变</h3><p>根据变化幅度选择文字，或白模＋文字，避免不必要的强重构。</p></div><span class="tag">系列生成</span></header><div class="stage-body"><div class="stage-columns"><div><h4>输入 INPUT</h4><ul><li>正式场景母图</li><li>每张明确的 pose / 景别 / 机位目标</li><li>必要白模或构图参考</li><li>商品细节图</li></ul></div><div><h4>操作 ACTION</h4><ol><li>场景变化小：母图＋文字控制目标动作。</li><li>构图变化大：白模＋文字控制骨架、重心、机位、视差。</li><li>身体朝向与相机方位分开写；允许新姿势带来真实褶皱和接触阴影。</li><li>按需要安排全身、中景、侧/背侧、坐姿，避免重复朝向与重复动作。</li></ol></div><div><h4>输出 / 返工</h4><p><b>输出：</b>有差异且仍具系列一致性的裂变初稿。</p><p><b>不通过：</b>动作错 → 调整姿势目标；视差错 → 重定相机/白模；脸与商品漂移 → 转相应修复模块。</p></div></div></div><footer class="stage-end">阶段结论：<b>裂变的是拍摄关系，不是人物身份与真实商品。</b></footer></article>
+<article class="stage" data-searchable=""><header class="stage-head"><span class="stage-n">07</span><div><h3>逐张商业精修 → Gate C</h3><p>每张成片单独收敛，重新对齐母图视觉基准。</p></div><span class="tag amber">成片验收</span></header><div class="stage-body"><div class="stage-columns"><div><h4>输入 INPUT</h4><ul><li>每张裂变初稿</li><li>正式母图及原商品细节</li><li>面部身份/九宫格参考（必要时）</li></ul></div><div><h4>操作 ACTION</h4><ol><li>修正局部杂色、偏色、人物肤色与背景色差。</li><li>面部不一致时判断需要重换脸还是只做后期校色。</li><li>逐张校正印花、走线、领口、裤脚、穿插、坏手等。</li><li>必要时 1K 角色换头 → 2K 提升 → 色彩匹配；复核身份与工艺未漂移。</li></ol></div><div><h4>输出 / 返工</h4><p><b>输出：</b>每张已确认的完稿候选图。</p><p><b>不通过：</b>局部错误 → 留在 07 修；系统性母图问题 → 回查 05，避免逐张重复救火。</p></div></div></div><footer class="stage-end">Gate C：<b>外观一致、商品真实、场景协调、画面干净。</b></footer></article>
+<article class="stage" data-searchable=""><header class="stage-head"><span class="stage-n">08</span><div><h3>输出、渠道适配与归档</h3><p>成片完成不等于交付完成，需保持版本和渠道可追溯。</p></div><span class="tag green">交付</span></header><div class="stage-body"><div class="stage-columns"><div><h4>输入 INPUT</h4><ul><li>Gate C 合格图</li><li>本单渠道要求、尺寸比例、命名规则</li><li>源素材、种子图、母图和工程文件</li></ul></div><div><h4>操作 ACTION</h4><ol><li>按实际平台规范输出分辨率、比例、格式和大小。</li><li>核对 SKU / 色号 / 货号与成片是否正确对应。</li><li>保留源素材、母图、裂变初稿、精修完稿和导出文件。</li><li>必要时记录使用模型、主要修复方法及返工原因。</li></ol></div><div><h4>输出 / 返工</h4><p><b>输出：</b>完整可交付图像包及可追溯母图。</p><p><b>不通过：</b>尺寸/命名/渠道要求错误 → 重导出；内容错误 → 返回 07 修图。</p></div></div></div><footer class="stage-end">交付结论：<b>正确的图片，以正确的文件进入正确的渠道。</b></footer></article>
+</section>
+<section class="section" id="gate">
+<div class="sectionhead"><span class="secnum">04</span><div><h2>三道验收关口 · 可勾选清单</h2><p>勾选仅代表本次人工确认，不是自动图像检测。浏览器本地保存；更换设备或清浏览数据可能丢失。</p></div></div>
+<div class="progress-card no-print"><div class="progress-top"><div><b>本次审核进度</b><div class="quiet" style="font-size:12px">Gate A / B / C + 交付核验</div></div><span class="progress-value" id="progressVal">0%</span></div><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><small id="progressText">0 / 0 项已确认</small></div>
+<div class="panel"><span class="tag amber">GATE A / SEED</span><h3>种子图：商品与人物是否正确？</h3><div class="checks">
+<label class="check"><input data-check="a1" type="checkbox"/>商品品类、版型和上下装数量正确</label><label class="check"><input data-check="a2" type="checkbox"/>服装主色、拼色与图案一致</label><label class="check"><input data-check="a3" type="checkbox"/>领口、袖口、腰口、裤脚及重点工艺正确</label><label class="check"><input data-check="a4" type="checkbox"/>人物身份、发型、年龄感及身材比例合理</label><label class="check"><input data-check="a5" type="checkbox"/>完整全身可检查，手脚/鞋底没有明显错误</label><label class="check"><input data-check="a6" type="checkbox"/>已保存经过修复的合格种子图</label>
+</div></div>
+<div class="panel"><span class="tag amber">GATE B / MASTER</span><h3>场景母图：能否支撑整组裂变？</h3><div class="checks">
+<label class="check"><input data-check="b1" type="checkbox"/>人物与商品继承 Gate A 或可信旧图</label><label class="check"><input data-check="b2" type="checkbox"/>尺度、透视、机位、地面接触自然</label><label class="check"><input data-check="b3" type="checkbox"/>人物受光、背景光场和色温协调</label><label class="check"><input data-check="b4" type="checkbox"/>肤色、商品颜色和主体边缘无明显异常</label><label class="check"><input data-check="b5" type="checkbox"/>背景明显脏斑、杂物和生成瑕疵已清理</label><label class="check"><input data-check="b6" type="checkbox"/>已保存唯一明确的正式母图版本</label>
+</div></div>
+<div class="panel"><span class="tag amber">GATE C / DERIVED</span><h3>裂变图：每张是否达到完稿标准？</h3><div class="checks">
+<label class="check"><input data-check="c1" type="checkbox"/>目标姿势、景别、机位和构图符合计划</label><label class="check"><input data-check="c2" type="checkbox"/>人物辨识度、发型和头颈比例正确</label><label class="check"><input data-check="c3" type="checkbox"/>印花、拼缝、工艺和真实商品颜色正确</label><label class="check"><input data-check="c4" type="checkbox"/>新姿势的褶皱、遮挡和接地阴影合理</label><label class="check"><input data-check="c5" type="checkbox"/>整体色彩与场景母图视觉基准一致</label><label class="check"><input data-check="c6" type="checkbox"/>局部杂色、坏手、背景异常已修复</label>
+</div></div>
+<div class="panel"><span class="tag green">DELIVERY</span><h3>导出文件是否具备交付条件？</h3><div class="checks"><label class="check"><input data-check="d1" type="checkbox"/>渠道尺寸、格式和文件体积符合实际要求</label><label class="check"><input data-check="d2" type="checkbox"/>货号 / 色号 / SKU 对应无误</label><label class="check"><input data-check="d3" type="checkbox"/>母图与精修原文件已存档</label><label class="check"><input data-check="d4" type="checkbox"/>导出图无误，文件命名与目标渠道一致</label></div></div>
+<div class="callout warn"><b>旧品快速路径提示：</b>跳过生成种子图 ≠ 跳过商品审核。可以用“可信旧图复核”替代 Gate A 的新图生成步骤，但商品、身份及关键工艺仍须确认。</div>
+</section>
+<section class="section" id="branch">
+<div class="sectionhead"><span class="secnum">05</span><div><h2>裂变方式判断器</h2><p>核心问题：这次只是变动作，还是要重新建立摄影机与空间关系？</p></div></div>
+<div class="decision no-print"><h3>当前这张裂变图要改变什么？</h3>
+<label class="choice"><input checked="" name="variation" type="radio" value="small"/>只改变人物姿势、视线或轻微构图；场景和机位基本不动</label>
+<label class="choice"><input name="variation" type="radio" value="medium"/>改变全身/中景、人物占比、拍摄角度，背景仍相对可控</label>
+<label class="choice"><input name="variation" type="radio" value="large"/>大幅变化姿势和空间构图，需要确认重心、遮挡、机位与背景视差</label>
+<div class="decision-out"><h4 id="decisionTitle">路径 A｜母图＋文字控制</h4><div id="decisionDesc">以正式母图为基础，写清楚唯一目标姿势，保持人物、商品和场景光照基准，允许新动作引发自然褶皱及接触阴影变化。</div></div>
+</div>
+<div class="grid three" style="margin-top:16px">
+<article class="panel mini"><span class="label">A / SMALL CHANGE</span><h3>母图＋文字</h3><p>适合站立换重心、微转头、抬手、自然坐靠等不明显改变场景空间关系的操作。</p><span class="tag green">减少无谓重构</span></article>
+<article class="panel mini"><span class="label">B / MEDIUM CHANGE</span><h3>母图＋明确机位/景别</h3><p>适合平视换侧角、全身改中景、轻微镜头高度变化；明确相机位置和人物身体朝向。</p><span class="tag">检查人物占比</span></article>
+<article class="panel mini"><span class="label">C / LARGE CHANGE</span><h3>母图＋白模＋文字</h3><p>适合明显空间重拍、复杂坐姿、遮挡较多的机位迁移；白模负责骨架与构图，不继承身份、衣服和材质。</p><span class="tag amber">核对背景视差</span></article>
+</div>
+<div class="callout"><b>三轴必须分开描述：</b>Pose（人物身体姿势、头部视线与重心）／Composition（景别、主体位置、留白）／Camera（相机方位、高度与俯仰）。“人物转身”和“相机移动”不是同一种变化。</div>
+</section>
+<section class="section" id="repair">
+<div class="sectionhead"><span class="secnum">06</span><div><h2>异常修复与商业精修工具箱</h2><p>按“出了什么问题”调用修复流程，并在对应场景下参考常用 Prompt；不要给每张图重复叠加全部处理。</p></div></div><div class="prompt-note"><b>常用提示词参考：</b> 以下内容作为你个人工作流中的常用起始 Prompt，适合在修复工具箱场景下调用。它们是“起点模板”，实际使用时仍要按当前图像、模型和目标结果做删减、换词或补充，不建议不加判断地整段套用。</div>
+<details class="recipe" data-searchable="" open=""><summary><span class="tag rose">R01</span> 面部不一致 / 换脸 / 换头</summary><div class="recipe-body"><p><b>首先判断：是五官结构错，还是五官正确但颜色、明暗、质感不对？</b></p><div class="grid"><div><h4>结构不对 → 生成式修复</h4><ol><li>马赛克或遮蔽问题面部区域，保留可用的身体、姿势、场景。</li><li>提供面部九宫格作为多角度身份参考，重新生成局部面部。</li><li>或者借助已有 Skill 的换脸/五官替换能力明确图源、发型、光影和头颈比例。</li><li>如果需要整头替换，单独核查头发、脖颈、衣领衔接。</li></ol></div><div><h4>结构正确 → 优先后期修复</h4><ol><li>曲线 / Camera Raw 蒙版统一脸与身体的明暗、肤色。</li><li>用参考母图做局部色彩匹配。</li><li>借助中性灰、分频及局部 AI 修复清理斑驳杂色。</li><li>避免为轻微偏色反复换脸导致辨识度下降。</li></ol></div></div><div class="callout"><b>个人实战备选链：</b>Nano Banana 3.1 Flash 的 1K 模式尝试换头 → 审核身份一致性与偏色 → 通过 2K 编辑/提升分辨率 → 色彩匹配 → 再审核五官、发型及服装。这里是使用者的经验路径，不代表所有版本或场景的保证性能。</div><p><b>回退建议：</b>只出现在裂变图中的脸错，尽量修当前图；一整组都偏离同一个身份，则先检查母图和人脸参考源。</p><div class="prompt-stack"><div class="prompt-box"><div class="prompt-head"><span class="prompt-kicker">商业修片 / 马赛克面部修复</span><h4>面部高清修复提示词</h4></div><p>适合先对问题面部做马赛克或遮挡，再引导模型参考人脸结构进行局部重建。</p><pre><code>商业修片：模特面部高清修复，修复图1模特面部细节，参考图2面部结构和五官细节。保持图1中的模特光影调性、色彩直方图不变、高光中间调暗调不变。真实发丝细节。4k，高清，raw。高级克制。</code></pre><div class="prompt-tip">可与九宫格人脸参考、局部遮罩修复结合使用。</div></div><div class="prompt-box"><div class="prompt-head"><span class="prompt-kicker">GPT Image 2.5</span><h4>肤色均匀与五官细节优化</h4></div><p>适合在五官结构基本正确时，继续统一肤色与面部质感。</p><pre><code>保持原图环境背景修正均匀肤色，添加五官细节。不要有多余杂色，不要有过度锐化边缘，柔和清晰。不要更改五官结构。不要出现油腻质感，塑料质感，蜡质感。不要泛白，保持原图的饱和度和亮度。哑光雾面妆感。</code></pre><div class="prompt-tip">更适合“脸已对、质感不对”的情况；若五官结构错，应优先回到局部重生成。</div></div></div></div></details>
+<details class="recipe" data-searchable=""><summary><span class="tag rose">R02</span> 偏色、肤色、色温与画质统一</summary><div class="recipe-body"><div class="table-wrap"><table><thead><tr><th>问题</th><th>优先动作</th><th>注意点</th></tr></thead><tbody><tr><td>整张画面偏暖/偏冷/偏色</td><td>以正式母图、目标色为基准，曲线/Camera Raw/色彩匹配</td><td>保护商品真实颜色，不能只按氛围统一</td></tr><tr><td>面部与身体色温不一致</td><td>分区曲线、蒙版及局部色彩匹配</td><td>保留面部明暗和真实皮肤细节</td></tr><tr><td>人物与场景不融</td><td>检查受光、环境色、接地阴影，再做局部调色</td><td>不是简单给人物叠一层整体滤镜</td></tr><tr><td>AI 杂色、脏斑、蜡感</td><td>局部生成修复、分频、中性灰、必要程度降噪</td><td>不能磨掉织纹、印花、毛孔</td></tr><tr><td>提升分辨率后颜色漂移</td><td>2K 结果与原母图色彩匹配，复查人物/商品</td><td>锐化增加不等于细节真实还原</td></tr></tbody></table></div><div class="notice"><b>个人经验，暂不写成通用预设：</b>你提到通过约 2%–4% 的洋红图层、使用“减去”混合模式尝试修正某些偏红图。是否有效取决于实际偏色、图层数值、色彩空间及不透明度；先在副本上 A/B 检查皮肤、灰阶和商品颜色，不作为所有图像的默认自动步骤。</div><div class="prompt-stack"><div class="prompt-box"><div class="prompt-head"><span class="prompt-kicker">修色降噪 / 通用参考</span><h4>降噪与数字伪影清理</h4></div><p>适合画面存在数字噪声、压缩脏点、色彩噪点和 AI 脏纹理时使用。</p><pre><code>extreme denoise, remove visible noise, remove color noise, remove digital artifacts, remove grain, remove compression artifacts, suppress noisy micro-texture, clean noisy surfaces</code></pre><div class="prompt-tip">建议与“保护商品纹理、不要抹掉织纹/毛孔/印花”一并使用，避免过度清理。</div></div></div></div></details>
+<details class="recipe" data-searchable=""><summary><span class="tag rose">R03</span> 局部印花、缝线、领口、裤脚与材质</summary><div class="recipe-body"><p><b>处理原则：</b>商品细节的局部纠错优先于整件重生。先明确到底是图案错、位置错、结构错，还是光影把正确工艺表现歪了。</p><ol><li>同时提供当前目标图、原始商品图、必要的局部工艺图或标注区域。</li><li>仅修改明确区域；未标注的版型、纹理、颜色、动作和光场应尽量保留。</li><li>印花修正核查内容、方向、比例、位置和被衣服转折遮挡的方式。</li><li>缝线核查针脚数量、轨迹、间距、布面转折和遮挡逻辑。</li><li>裂变姿势改变后，允许图案/缝线产生真实透视变形，禁止脱离布面漂浮。</li></ol><div class="callout"><b>当前个人模型经验：</b>GPT Image 2.5 可优先用于印花细节、局部还原与商品工艺修正；仍需以原始商品图验收，不因模型名自动判定正确。</div><p><b>回退建议：</b>若整个款式被重设计，回到商品正确的种子图/母图；若仅局部失真，留在精修阶段修复。</p><div class="prompt-stack"><div class="prompt-box"><div class="prompt-head"><span class="prompt-kicker">Nano Banana 3.1 Flash</span><h4>缝线工艺修复（完整描述）</h4></div><p>用于明确指定某个部位的缝线工艺，并要求参照工艺参考图进行替换。</p><pre><code>修改图1的袖口缝线工艺，参考图2的缝线工艺，将图1的改成双针缝线。</code></pre><div class="prompt-tip">适合结构明确、修改范围清晰的工艺修复。</div></div><div class="prompt-box"><div class="prompt-head"><span class="prompt-kicker">Nano Banana 3.1 Flash</span><h4>缝线工艺修复（标注区域）</h4></div><p>适合已经在图上做红色标注，只需要模型聚焦局部区域时使用。</p><pre><code>修改图1红色标注的区域缝线工艺，参考图2的缝线工艺。</code></pre><div class="prompt-tip">若位置、轨迹、针脚数量很重要，建议同时提供放大局部参考。</div></div><div class="prompt-box"><div class="prompt-head"><span class="prompt-kicker">GPT Image 2.5</span><h4>印花比例与图形修复</h4></div><p>用于修复印花大小比例、图形内容与贴附方式。</p><pre><code>修复修改图1中的印花大小比例和图形，参考图2中的印花大小比例和图形。是印上去的没有凹凸。</code></pre><div class="prompt-tip">适合印花被改错、放大缩小失真、图案内容偏移等问题。</div></div></div></div></details>
+<details class="recipe" data-searchable=""><summary><span class="tag rose">R04</span> 人物与场景融合失败 / 背景污染</summary><div class="recipe-body"><ol><li>查看是否把旧图家具、绿植、球、墙饰、旧阴影带到了新场景。</li><li>必要时准备白底抠图或真透明主体，明确只继承人物、商品、姿势。</li><li>补目标场景作为独立来源，检查人物尺度、地平线、机位高度与透视。</li><li>观察背景实际主光方向、光质与阴影；无法判断时不要编造“窗边左上光”。</li><li>重建人物脸、衣服和鞋子的受光、接地影与环境色。</li></ol><p><b>当前个人模型经验：</b>Nano Banana 系列可优先用于人物与环境融合；不把“优先尝试”写成对所有版本和输入方式的客观排名。</p></div></details>
+<details class="recipe" data-searchable=""><summary><span class="tag rose">R05</span> 白模污染、姿势失真或新机位视差错误</summary><div class="recipe-body"><ol><li>白模只提供身体骨架、重心、构图与必要摄影机关系，不继承脸、服装、材质或背景。</li><li>明确当前任务是人物转身还是相机移动；相机移动时按新视角重建背景遮挡和视差。</li><li>检查手臂、手掌、腿部支撑、脚底、服装接触褶皱与头颈比例。</li><li>如果复杂变化多次失败，退回母图重新分解为单一目标动作与机位。</li></ol><div class="prompt-stack"><div class="prompt-box"><div class="prompt-head"><span class="prompt-kicker">机位调整 / 英文短句</span><h4>调整镜头视角与背景视差</h4></div><p>适合在母图基础上尝试相机绕主体移动，并要求背景环境同步发生透视变化。</p><pre><code>change the camera location, Orbit to the left 70°. 背景环境相对镜头随之改变角度，产生明显视差。</code></pre><div class="prompt-tip">使用时要区分“人物转身”与“相机移动”；若机位变化大，最好配合白模和文字控制。</div></div></div></div></details>
+<details class="recipe" data-searchable=""><summary><span class="tag rose">R06</span> 高清、去噪、超分后的新问题</summary><div class="recipe-body"><p>原始清理思路是去数字噪声、脏斑与 AI 伪影，而不是抹掉真实棉织纹、毛绒、毛孔、印花和针脚。可先轻度清理，只有明显缺陷和明确要求时加强。</p><div class="callout warn">如果出现蜡感、磨皮、边缘过锐、印花被重绘或肤色改变，降低修复强度，并对比修前和修后的面部、商品微细节。不以“2K/高清”替代实际质量检查。</div></div></details>
+</section>
+<section class="section" id="models">
+<div class="sectionhead"><span class="secnum">07</span><div><h2>模型与工具按任务分工</h2><p>这里记录的是当前个人实战优先级，不是模型榜单，也不是对外部模型能力的严格对照测试结果。</p></div></div>
+<div class="model-cards">
+<article class="model-card" data-searchable=""><span class="tag green">局部商品修正</span><h3>GPT Image 2.5</h3><p><strong>优先试用：</strong>印花修复、局部工艺、视觉细节还原。</p><p class="quiet">验收仍看真实产品细节；错误涉及整个版型时不要只靠局部补丁。</p></article>
+<article class="model-card" data-searchable=""><span class="tag green">场景融合</span><h3>Nano Banana 系列</h3><p><strong>优先试用：</strong>人物/主体进入目标环境、人物与背景融合、场景母图建立。</p><p class="quiet">配合干净主体、独立场景图、商品细节参考。</p></article>
+<article class="model-card" data-searchable=""><span class="tag green">角色换头</span><h3>Nano Banana 3.1 Flash · 1K</h3><p><strong>你的实践路径：</strong>换头 → 身份审核 → 提升至 2K → 色彩匹配及精修。</p><p class="quiet">产品命名、配置与可用性随平台更新，使用时以实际接口为准。</p></article>
+<article class="model-card" data-searchable=""><span class="tag">精准提示词</span><h3>现有 Ecom Image Prompt Director</h3><p>用于厘清图源分工、换脸/换装、场景融合、局部工艺、姿势和机位的保留/修改边界。</p><p class="quiet">它是辅助表达需求的工具，不承担自动图像验收。</p></article>
+<article class="model-card" data-searchable=""><span class="tag">色彩与画质</span><h3>Photoshop / Camera Raw</h3><p>曲线、蒙版、分区调整、局部清理、分频、中性灰、商品与肤色匹配。</p><p class="quiet">适合已正确但仍需商业精修的图，不应盲目重新生成全部主体。</p></article>
+<article class="model-card" data-searchable=""><span class="tag">色彩算法</span><h3>参考色彩匹配 / 局部 AI 校色</h3><p>对齐母图影调、修正人物与场景色温关系；必要时采用独立算法或图像模型。</p><p class="quiet">参考区域和目标区域不同，校色也应区别处理。</p></article>
+</div>
+<div class="notice" style="margin-top:16px"><b>模型路由不是唯一答案：</b>同一任务可预设首选与备选，但输出必须以商品细节、人物身份、场景光影和整体画质检查为准。建议后续记录模型版本、输入素材、分辨率、成功/失败原因，再决定是否固化为团队标准。</div>
+</section>
+<section class="section" id="qa">
+<div class="sectionhead"><span class="secnum">08</span><div><h2>最终审核维度与返工路径</h2><p>遇到问题先定位最早出错的资产，避免“越修越散”。</p></div></div>
+<div class="table-wrap"><table><thead><tr><th>异常</th><th>先检查什么</th><th>优先返回节点</th></tr></thead><tbody>
+<tr><td>所有裂变图服装印花相同位置都错</td><td>种子图、场景母图、商品细节参考</td><td>03 / 05：修商品基准</td></tr>
+<tr><td>某一张裂变图手脚或 pose 错</td><td>该张目标动作与白模、生成结果</td><td>06 / 07：单张重做或局部修</td></tr>
+<tr><td>所有图的人物脸都偏离身份</td><td>种子图、面部参考、母图</td><td>02 / 03 / 05：统一身份基准</td></tr>
+<tr><td>只有一张脸色和身体不一致</td><td>该张面部编辑和局部肤色</td><td>07 / R01 / R02：局部修复</td></tr>
+<tr><td>人物像贴在背景上</td><td>尺度、透视、主光、环境色、接地影</td><td>04 / 05：场景融合</td></tr>
+<tr><td>机位换了背景却没变</td><td>Camera 与 Pose 是否混淆、白模/视差</td><td>06 / R05：重建空间</td></tr>
+<tr><td>超分后发型或印花改变</td><td>1K 与 2K 对比、原商品与人物参考</td><td>07 / R01 / R06：调整提升方式</td></tr>
+<tr><td>图没问题但平台拒绝文件</td><td>尺寸、体积、格式、命名与平台规范</td><td>08：重新导出与校验</td></tr>
+</tbody></table></div>
+<div class="callout"><b>质量审核的优先顺序：</b>商品是否真实 → 人物是否一致 → 动作与摄影关系是否合理 → 场景与光影是否融合 → 画面是否干净 → 文件是否符合交付规范。</div>
+</section>
+<section class="section" id="files">
+<div class="sectionhead"><span class="secnum">09</span><div><h2>文件版本与归档建议</h2><p>下方是建议组织方式，不替代你现有的渠道文件命名规则。</p></div></div>
+<div class="panel"><h3>按商品与颜色维护单独生产链</h3><div class="template"><pre>货号_颜色/
+├─ 00_Source/       原始静物、人物、背景、细节参考
+├─ 01_Seed/         种子初稿、精修合格种子图（新款）
+├─ 02_Master/       场景初稿、正式场景母图
+├─ 03_Derived/      裂变图初稿、白模与必要控制参考
+├─ 04_Retouch/      PSD / 精修过程 / 确认完稿
+├─ 05_Export/       各渠道最终导出图
+└─ 99_Notes/        简短任务记录、版本与返工信息</pre></div><p>旧品快速路径可以不生成新种子图，但应在 00_Source 或 02_Master 中明确写明复用的旧图版本及其对应商品信息。母图版本不要被每次局部修复覆盖；需要更新母图时，记录更新原因与新版本。</p></div>
+<div class="panel"><h3>最简版本记录建议</h3><div class="table-wrap"><table><thead><tr><th>信息</th><th>记录内容</th></tr></thead><tbody><tr><td>商品</td><td>货号 / 色号 / SKU / 季节（有则记）</td></tr><tr><td>生产路径</td><td>新款标准 / 旧品快线</td></tr><tr><td>当前母图</td><td>文件名、版本、确认日期</td></tr><tr><td>目标成片</td><td>张数、全身/中景分配、目标用途</td></tr><tr><td>模型/工具</td><td>任务、模型版本、分辨率、特殊操作</td></tr><tr><td>问题与返工</td><td>原因、修复方式、是否影响母图</td></tr><tr><td>交付</td><td>渠道、文件位置、验收状态</td></tr></tbody></table></div></div>
+<div class="callout warn">平台输出规范因渠道及业务调整可能变化。本手册不假定统一的文件体积、尺寸或命名数字；最终以当前业务渠道规范和真实验收结果为准。</div>
+</section>
+<section class="section" id="templates">
+<div class="sectionhead"><span class="secnum">10</span><div><h2>可复制的日常任务记录模板</h2><p>不是新的 Prompt 母版，而是每单生产前后记录决策的轻量工作单。</p></div></div>
+<div class="template"><button class="btn copy no-print" data-copy="jobTemplate">复制模板</button><pre id="jobTemplate">【基础信息】
+货号 / 色号：
+新款 / 旧品翻单：
+输出渠道与用途：
+目标张数 / 景别 / 比例：
+
+【图像来源】
+商品静物 / 细节图：
+模特身份 / 身材比例：
+白底主体 / 透明主体：
+目标场景：
+复用种子图 / 场景母图版本：
+
+【当前阶段】
+□ 基础素材确认
+□ 种子图（旧品可不生成）
+□ Gate A 商品与人物确认
+□ 场景基础站立图
+□ Gate B 正式母图确认
+□ 姿势 / 构图 / 机位裂变
+□ Gate C 逐张完稿确认
+□ 渠道输出与归档
+
+【本次重点问题】
+人物 / 商品 / 印花工艺 / 色彩 / 背景 / 机位：
+采用修复方法 / 模型 / 参数：
+是否需要退回母图：
+
+【最终交付】
+母图版本：
+完稿文件：
+渠道导出路径：
+待解决问题：</pre></div>
+<div class="panel"><h3>工作结束时，至少回答三个问题</h3><div class="grid three"><div><span class="label">01 / 标准</span><p><strong>本单可信的商品与人物基准是哪张？</strong></p></div><div><span class="label">02 / 复用</span><p><strong>后续裂变应该基于哪版母图？</strong></p></div><div><span class="label">03 / 风险</span><p><strong>最可能在下一轮重复出现的错误是什么？</strong></p></div></div></div>
+</section>
+<footer>《AI 电商服装生图日常生产 SOP》v0.3｜依据用户实际工作心得整理。模型分工与部分后期技巧为实践记录，随真实案例持续修订。此 HTML 可离线打开；无网络请求、无外部依赖。<br/>手册范围：真人穿着模特图为主；静物测试视频与数字人口播视频暂不纳入本版生产 SOP。</footer>
+</div>
+</main>
+<script>
+(function(){
+'use strict';
+const qs=s=>document.querySelector(s), qsa=s=>Array.from(document.querySelectorAll(s));
+const sidebar=qs('#sidebar');
+qs('#mobileMenu').addEventListener('click',()=>sidebar.classList.toggle('open'));
+qsa('.nav-link').forEach(link=>link.addEventListener('click',()=>sidebar.classList.remove('open')));
+const links=qsa('.nav-link');
+if('IntersectionObserver' in window){const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));}})},{rootMargin:'-16% 0px -74% 0px'});qsa('section[id],header[id]').forEach(s=>obs.observe(s));}
+const key='ecom-sop-v03-checked';let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}')||{}}catch(e){saved={}}
+const all=qsa('input[data-check]');all.forEach(el=>{el.checked=!!saved[el.dataset.check];el.addEventListener('change',()=>{saved[el.dataset.check]=el.checked;try{localStorage.setItem(key,JSON.stringify(saved))}catch(e){}refresh()})});
+function refresh(){const done=all.filter(x=>x.checked).length,total=all.length,p=total?Math.round(done/total*100):0;qs('#progressVal').textContent=p+'%';qs('#progressFill').style.width=p+'%';qs('#progressText').textContent=done+' / '+total+' 项已确认'}refresh();
+qs('#resetChecks').addEventListener('click',()=>{if(!confirm('确定清空当前浏览器保存的全部验收勾选吗？'))return;all.forEach(el=>{el.checked=false});saved={};try{localStorage.removeItem(key)}catch(e){}refresh()});
+const recipes=qsa('.recipe');let expanded=false;qs('#openAll').addEventListener('click',e=>{expanded=!expanded;recipes.forEach(x=>x.open=expanded);e.currentTarget.textContent=expanded?'收起修复章节':'展开修复章节'});
+const outcomes={small:['路径 A｜母图＋文字控制','以正式母图为基础，写清楚唯一目标姿势，保持人物、商品和场景光照基准，允许新动作引发自然褶皱及接触阴影变化。'],medium:['路径 B｜母图＋明确机位/景别','明确全身或中景、主体占比和最终相机角度；区分人物身体朝向与摄影机移动，必要时补充姿势图，检查背景透视和裁切。'],large:['路径 C｜母图＋白模＋文字','白模仅提供骨架、重心与构图，文字明确相机目标和场景需要重建的视差；模特身份、服装、真实材质仍以正式母图和商品图为准。']};
+qsa('input[name=variation]').forEach(el=>el.addEventListener('change',()=>{const t=outcomes[el.value];qs('#decisionTitle').textContent=t[0];qs('#decisionDesc').textContent=t[1]}));
+const search=qs('#search'),searchables=qsa('[data-searchable]');function runSearch(){const query=search.value.trim().toLocaleLowerCase();let total=0;searchables.forEach(node=>{const found=!query||node.textContent.toLocaleLowerCase().includes(query);node.classList.toggle('hidden-by-search',!found);if(found)total++});if(query && !total)qs('#search').style.borderColor='#c96067';else qs('#search').style.borderColor='';}search.addEventListener('input',runSearch);qs('#clearSearch').addEventListener('click',()=>{search.value='';runSearch();search.focus()});
+qs('#printDoc').addEventListener('click',()=>{recipes.forEach(x=>x.open=true);window.print()});
+qsa('[data-copy]').forEach(btn=>btn.addEventListener('click',async()=>{let text=qs('#'+btn.dataset.copy).innerText;try{await navigator.clipboard.writeText(text)}catch(e){let field=document.createElement('textarea');field.value=text;document.body.appendChild(field);field.select();document.execCommand('copy');field.remove()}const prev=btn.textContent;btn.textContent='已复制 ✓';setTimeout(()=>btn.textContent=prev,1700)}));
+})();
+</script>
+</body>
+</html>
