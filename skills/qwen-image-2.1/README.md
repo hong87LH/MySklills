@@ -9,6 +9,7 @@
 | 文件 | 用途 |
 | --- | --- |
 | [daily-prompt-tests.md](./daily-prompt-tests.md) | 日常有效提示词、测试状态、ComfyUI 参数与待验证任务 |
+| [structured-outpainting-panorama-templates.md](./structured-outpainting-panorama-templates.md) | 扩图方向 / 标准与超宽全景 / 全景扩图：候选结构化模板和官方比例路由（非正式 Skill） |
 | [official/system_prompt_edit.txt](./official/system_prompt_edit.txt) | Qwen Image 2.1 官方 PE-I2I 系统提示词，原文留存 |
 | [official/system_prompt_t2i.txt](./official/system_prompt_t2i.txt) | Qwen Image 2.1 官方 PE-T2I 系统提示词，原文留存 |
 | [official/LICENSE](./official/LICENSE) | 官方材料的原始许可协议 |
