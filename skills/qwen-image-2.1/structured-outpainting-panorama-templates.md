@@ -1,6 +1,6 @@
 # Qwen Image 2.1｜扩图与全景结构化提示词资料
 
-> 状态：候选模板资料 v0.1；不构成正式 Skill、不进入生产路由。  
+> 状态：候选模板资料 v0.2；不构成正式 Skill、不进入生产路由。  
 > 记录日期：2026-09-28  
 > 来源区分：**官方规则**来自 `official/system_prompt_edit.txt`；**英文模板**是从 [daily-prompt-tests.md](./daily-prompt-tests.md) 中本人的候选/有效记录抽取变量后形成，不是官方逐字提示词。  
 > 保留原始实验提示词全文，以便后续同图同 Seed 对比；本页只放复用模板及替换字典。
@@ -96,9 +96,36 @@ Perform panoramic outpainting by extending the original scene {EXTENSION_SCOPE},
 
 标准全景扩图代入后恢复既有 B06-05 原文；超宽版仅为结构化候选，**尚无单独样本证明**。这段包含商业场景特定的禁新增窗光和光斑限制，不适合不加判断地复制到所有题材。
 
-## 五、PANORAMA-360｜先存规则，不构造标准提示词
+## 五、PANORAMA-360｜官方第三类：360° / VR panorama
 
-官方将 `360° / VR panorama` 的比例列为 `2:1`，但**2:1 横向全景 ≠ 可无缝环绕的 360° equirectangular 环境图 ≠ HDR 文件**。目前没有经本人样本测试确认的 360° 无缝成品模板，因此此处只记录官方比例规则，不伪造一条“已验证的 360° 标准提示词”。
+官方在 [Panoramic generation 章节 L148–157](./official/system_prompt_edit.txt#L148-L157) 将全景分为三种，研究档案应全部保留：
+
+| 官方类型名称 | 官方 `wh_ratio` | 目前记录方式 |
+| --- | --- | --- |
+| `Standard panorama / 全景` | `2:1` | B06-01 原句 + 结构化候选 |
+| `Wide panorama / 超宽全景` | `3:1` | B06-02 原句 + 结构化候选 |
+| `360° / VR panorama` | `2:1` | 独立待验证候选；不可直接与普通全景合并 |
+
+### 为什么第三类不能只替换全景宽度？
+
+360° / VR 的 `2:1` 与普通全景 `2:1` 相同，但任务并不相同。对于希望用于 3D 场景环绕的结果，除了宽高比，通常还需要说明球面等距柱状投影（equirectangular）、环绕连续性与左右边缘衔接。**官方系统提示词在这一段只规定比例，并未提供这些几何属性的逐字成品提示词，也没有保证模型能稳定生成可用的 360° 环境贴图。**
+
+### PANORAMA-360-CANDIDATE-v1（个人新拟，未实测，非官方提示词）
+
+该实验候选独立于已有 B06 普通全景结构，**不标注“有效模板”**，仅为后续对照试验存档：
+
+```text
+Generate a 360-degree equirectangular panorama of the existing environment. Extend the visible scene into a coherent full-surround view, completing the unseen surroundings consistently with the original spatial structure, materials, colors, and lighting. Maintain a continuous environment around the entire horizontal field of view, with seamless continuity between the left and right edges.
+```
+
+| 测试变量 | 作用 | 暂定值 |
+| --- | --- | --- |
+| `PANORAMA_PROJECTION` | 目标全景投影 | `360-degree equirectangular panorama` |
+| `PANORAMA_COVERAGE` | 场景补全范围 | `full-surround view` |
+| `EDGE_CONTINUITY` | 边缘连续性 | `seamless continuity between the left and right edges` |
+| 官方 `wh_ratio` | 画面比例 | `2:1` |
+
+需额外验证：左右接缝、上下极区畸变、完整 360° 环绕、场景结构真实度。普通单张照片无法提供背后空间的真实证据，新增区域只能由模型推断；不能把 2:1 输出或生成成功直接认定为合格 HDRI。这里记录的是 LDR 图像生成候选，不代表自动得到 HDR 格式。
 
 ## 六、ComfyUI 参数与提示词分离记录
 
