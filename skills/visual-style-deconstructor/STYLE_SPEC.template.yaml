@@ -1,0 +1,236 @@
+version: "0.1"
+style_id: ""
+style_name: ""
+status: "exploration" # exploration | stable | family
+language: "zh-CN"
+
+meta:
+  created_from:
+    reference_count: 0
+    approved_count: 0
+    rejected_count: 0
+  primary_media: "" # photography | graphic_design | illustration | cgi | mixed
+  enabled_modules: []
+  confidence_overall: "medium" # low | medium | high
+
+brief:
+  commercial_goal: ""
+  emotional_goal: []
+  target_context: []
+  user_locked_requirements: []
+
+references:
+  - ref_id: "R01"
+    source_type: "reference_image"
+    primary_role: ""
+    secondary_roles: []
+    priority: 80
+    authorization:
+      preserve: []
+      extract: []
+      adapt: []
+      ignore: []
+    evidence_notes: ""
+
+style_summary:
+  one_sentence: ""
+  core_principles: []
+  signature_devices: []
+  supporting_traits: []
+  generic_traits: []
+
+visual_dna_core:
+  concept_intent:
+    value: ""
+    confidence: "medium"
+    source_refs: []
+    evidence_type: "observed"
+
+  composition:
+    structure: ""
+    balance: ""
+    subject_scale: ""
+    crop_behavior: ""
+    confidence: "medium"
+    source_refs: []
+
+  hierarchy:
+    primary_focus: ""
+    secondary_focus: ""
+    reading_path: ""
+    confidence: "medium"
+    source_refs: []
+
+  negative_space:
+    level: ""
+    preferred_zones: []
+    typical_range: ""
+    confidence: "medium"
+    source_refs: []
+
+  rhythm:
+    density: ""
+    repetition: ""
+    spacing_character: ""
+    confidence: "medium"
+    source_refs: []
+
+  color:
+    dominant_palette: []
+    accent_palette: []
+    saturation: ""
+    brightness: ""
+    temperature: ""
+    color_relationship: ""
+    confidence: "medium"
+    source_refs: []
+
+  tonal_contrast:
+    contrast_level: ""
+    shadow_character: ""
+    highlight_character: ""
+    confidence: "medium"
+    source_refs: []
+
+  shape_language:
+    geometry: ""
+    edge_character: ""
+    organic_vs_geometric: ""
+    confidence: "medium"
+    source_refs: []
+
+  material_texture:
+    primary_materials: []
+    surface_character: ""
+    texture_strength: ""
+    confidence: "medium"
+    source_refs: []
+
+  depth:
+    spatial_character: ""
+    foreground_midground_background: ""
+    perspective_strength: ""
+    confidence: "medium"
+    source_refs: []
+
+  emotion:
+    keywords: []
+    observable_evidence: []
+    confidence: "medium"
+    source_refs: []
+
+  post_processing:
+    cleanliness: ""
+    sharpness: ""
+    grain_noise: ""
+    color_finish: ""
+    confidence: "medium"
+    source_refs: []
+
+modules:
+  photography:
+    enabled: false
+    shot_type: []
+    camera_height: ""
+    camera_angle: ""
+    camera_distance: ""
+    focal_character: ""
+    depth_of_field: ""
+    lighting:
+      key_direction: ""
+      quality: ""
+      size_character: ""
+      fill_character: ""
+      contrast_ratio_character: ""
+      temperature: ""
+      practical_light_behavior: ""
+    set_environment:
+      architecture: ""
+      background_character: ""
+      prop_types: []
+      prop_density: ""
+      material_family: []
+    subject_behavior:
+      pose_energy: ""
+      gaze: ""
+      expression: ""
+      gesture: ""
+    product_behavior:
+      priority: ""
+      silhouette_visibility: ""
+      texture_visibility: ""
+      wrinkle_behavior: ""
+    finish:
+      skin: ""
+      fabric: ""
+      sharpening: ""
+      contrast: ""
+      cleanup: ""
+
+  graphic_design:
+    enabled: false
+    grid: ""
+    alignment: ""
+    typography:
+      role_system: ""
+      hierarchy: ""
+      scale: ""
+      weight_contrast: ""
+    spacing: ""
+    image_text_relationship: ""
+    headline_zone: ""
+    information_density: ""
+    graphic_devices: []
+    container_language: ""
+    texture_finish: ""
+
+  illustration_cgi:
+    enabled: false
+    rendering_mode: ""
+    abstraction_level: ""
+    edge_character: ""
+    geometry_language: ""
+    material_rendering: ""
+    lighting_model: ""
+    surface_detail: ""
+
+boundaries:
+  lock: []
+  adapt: []
+  variable:
+    - field: ""
+      allowed_range: ""
+      notes: ""
+  forbidden: []
+
+reproduction_recipe:
+  first_order_controls: []
+  secondary_controls: []
+  optional_accents: []
+  execution_order: []
+  failure_triggers: []
+
+evaluation:
+  hard_fail: []
+  weighted_score:
+    style_identity: 25
+    composition: 15
+    color: 15
+    lighting: 15
+    material_texture: 10
+    hierarchy: 10
+    commercial_usability: 10
+  pass_threshold: 80
+  notes: "Hard Fail 优先于总分；权重按项目类型调整。"
+
+learning:
+  approved_patterns: []
+  rejected_patterns: []
+  unresolved_questions: []
+  next_version_candidates: []
+
+provenance:
+  observed_fields: []
+  inferred_fields: []
+  user_locked_fields: []
+  last_change_reason: "initial v0.1 extraction"
